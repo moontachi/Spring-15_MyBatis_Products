@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN" 
+  "http://mybatis.org/dtd/mybatis-3-config.dtd">
+
+<configuration>
+	<typeAliases>
+		<typeAlias type="member.model.Member" alias="MyMember"/>
+		<typeAlias type="product.model.Product" alias="MyProduct"/>
+		<typeAlias type="order.model.Order" alias="MyOrder"/>
+		<typeAlias type="orderdetail.model.OrderDetail" alias="MyOrderDetail"/>
+	</typeAliases>
+	
+	<mappers>
+		<mapper resource="mybatis/product.xml"/>
+		<mapper resource="mybatis/member.xml"/>
+		<mapper resource="mybatis/order.xml"/>
+		<mapper resource="mybatis/orderdetail.xml"/>
+		<mapper resource="mybatis/composite.xml"/>
+	</mappers>
+	
+	
+</configuration>
+
+
