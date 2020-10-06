@@ -6,6 +6,10 @@
 	function insert(){
 		location.href="insert.prd";
 	}
+	
+	function goUpdate(num) {
+		location.href="update.prd?num="+num;
+	}
 </script>
 
 
@@ -40,11 +44,13 @@ ProductList.jsp <br>
 	<c:forEach var="bean" items="${lists }" >
 		<tr>
 			<td>${bean.num }</td>
-			<td>${bean.name }</td>
+			<td>
+				<a href="detail.prd?num=${bean.num }">${bean.name }</a>
+			</td>
 			<td>${bean.contents }</td>
 			<td>${bean.price }</td>
 			<td><a href="delete.prd?num=${bean.num }&pageNumber=${pageInfo.pageNumber}">삭제</a></td>
-			<td><input type="button" value="수정" onclick="goUpdate('${bean.num }','${pageInfo.pageNumber}')"></td>																		
+			<td><input type="button" value="수정" onclick="goUpdate('${bean.num }')"></td>																		
 		</tr>
 	</c:forEach>
 	 

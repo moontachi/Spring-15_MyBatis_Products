@@ -16,7 +16,7 @@ public class ProductDao {
 	
 	String namespace = "product.model.Product";
 	
-	@Autowired // 객체를 아래 변수에 넣어라(객체는 root-context.xml에서 만들었다.)
+	@Autowired 
 	SqlSessionTemplate sqlSessionTemplate;
 	
 	
@@ -38,6 +38,24 @@ public class ProductDao {
 		
 		return lists;
 		
+	}
+	
+	public int insertData(Product bean) {
+	
+		int cnt = sqlSessionTemplate.insert(namespace + ".InsertData",bean);
+		return cnt;
+	}
+	
+	
+	public Product getDetailView(int num) {
+		Product bean = sqlSessionTemplate.selectOne(namespace + ".GetDetailView",num);
+		return bean;
+	}
+	
+	
+	public int updateData(Product bean) {
+		int cnt = sqlSessionTemplate.update(namespace + ".UpdateData",bean);
+		return cnt;
 	}
 
 	

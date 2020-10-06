@@ -22,7 +22,7 @@ public class MemberRegisterController {
 	@Autowired
 	MemberDao memberDao;
 	
-	//MemberLoginForm.jsp ¿¡¼­ ¿äÃ»ÇÔ (·Î±×ÀÎÈ­¸é¿¡¼­ 'È¸¿ø°¡ÀÔ' Å¬¸¯ÇØ¼­ ³Ñ¾î¿È)
+	//MemberLoginForm.jsp ì—ì„œ ìš”ì²­í•¨ (ë¡œê·¸ì¸í™”ë©´ì—ì„œ 'íšŒì›ê°€ì…' í´ë¦­í•´ì„œ ë„˜ì–´ì˜´)
 	@RequestMapping(value=command, method=RequestMethod.GET)
 	public String doAction() {
 		
@@ -30,14 +30,14 @@ public class MemberRegisterController {
 		
 	}
 	
-	//MemberRegisterForm.jsp ¿¡¼­ ¿äÃ»ÇÔ (È¸¿ø°¡ÀÔÈ­¸é¿¡¼­ 'Ãß°¡ÇÏ±â' Å¬¸¯ÇØ¼­ ³Ñ¾î¿È)
+	//MemberRegisterForm.jsp ì—ì„œ ìš”ì²­í•¨ (íšŒì›ê°€ì…í™”ë©´ì—ì„œ 'ì¶”ê°€í•˜ê¸°' í´ë¦­í•´ì„œ ë„˜ì–´ì˜´)
 	@RequestMapping(value=command, method=RequestMethod.POST)	
-	public ModelAndView doAction(@Valid Member member, BindingResult result) {	//Ä¿¸Çµå°´Ã¼(À¯È¿¼º°Ë»çÇÏ¸é¼­ ÇÑ¹­À½ÀÇ beanÀ¸·Î ¹­À»°ÍÀÌ´Ù)
+	public ModelAndView doAction(@Valid Member member, BindingResult result) {	//ì»¤ë§¨ë“œê°ì²´(ìœ íš¨ì„±ê²€ì‚¬í•˜ë©´ì„œ í•œë¬¶ìŒì˜ beanìœ¼ë¡œ ë¬¶ì„ê²ƒì´ë‹¤)
 		
 		ModelAndView mav = new ModelAndView();
 		
 		if(result.hasErrors()) {
-			System.out.println("À¯È¿¼º °Ë»ç ¿À·ùÀÔ´Ï´Ù.");
+			System.out.println("ìœ íš¨ì„± ê²€ì‚¬ ì˜¤ë¥˜ì…ë‹ˆë‹¤.");
 			mav.setViewName(getPage);
 			return mav;
 		}

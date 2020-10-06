@@ -7,7 +7,7 @@
 	}
 	
 	function memberList(num,pageNumber){
-		location.href="";
+		location.href="list.me";
 	}
 </script>    
     
@@ -32,7 +32,7 @@ WEB=INF\member\MemberLoginForm.jsp<br>
 				<input type="submit" value="로그인">
 				<input type="reset" value="취소">
 				<input type="button" value="회원가입" onclick="register()">
-				<input type="submit" value="로그인" onclick="memberList()">
+				<input type="button" value="목록보기" onclick="memberList()">
 			</td>		
 		</tr>
 	</table>

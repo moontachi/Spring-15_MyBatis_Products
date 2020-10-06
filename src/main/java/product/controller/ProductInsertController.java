@@ -1,9 +1,21 @@
 package product.controller;
 
-import javax.servlet.http.HttpSession;
+import java.io.File;
+import java.io.IOException;
 
+import javax.servlet.ServletContext;
+import javax.servlet.http.HttpSession;
+import javax.validation.Valid;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.multipart.MultipartFile;
+
+import product.model.Product;
+import product.model.ProductDao;
 
 @Controller
 public class ProductInsertController {
@@ -11,18 +23,61 @@ public class ProductInsertController {
 	final String command = "/insert.prd";
 	final String getPage = "ProductInsertForm";
 	
-	@RequestMapping(command)
+	final String gotoPage = "redirect:/list.prd";
+	
+	
+	@Autowired
+	ProductDao productDao;
+	@Autowired
+	ServletContext servletContext;
+	@RequestMapping(value = command, method = RequestMethod.GET)
 	public String doAction(HttpSession session) {
 		
-		System.out.println("loginInfo: "+session.getAttribute("loginInfo"));	//1. loginInfoÀÌ¸§À¸·Î  session¼³Á¤ÇÑ °Å ÀÖÀ¸¸é °¡Á®¿ÍºÁ¶ó (Ã³À½¿¡´Â ¼³Á¤ÇÑ°Ô ¾øÀ¸´Ï nullÀÌ Ãâ·ÂµÉ °Í)
+		System.out.println("loginInfo: "+session.getAttribute("loginInfo"));	//1. loginInfoï¿½Ì¸ï¿½ï¿½ï¿½ï¿½ï¿½  sessionï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Íºï¿½ï¿½ï¿½ (Ã³ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ñ°ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ nullï¿½ï¿½ ï¿½ï¿½Âµï¿½ ï¿½ï¿½)
 		
-		if(session.getAttribute("loginInfo") == null) {							//2. nullÀÌ¶õ ¾ê±â´Â loginInfoÀ¸·Î ¼¼¼Ç¼³Á¤ÇÑ°Ô ¾ø´Ù´Â ¶æ
-			session.setAttribute("destination",  "redirect:/insert.prd");		//4. ·Î±×ÀÎÆûÀ¸·Î ³Ñ¾î°¡±âÀü¿¡ session¼³Á¤ÇÏ°í °¡°Ú´Ù(¿ø·¡ÇÏ·Á´Â°Ô ¹¹¿´´ÂÁö loginÇÏ°í¿Íµµ ÀØÁö¾Êµµ·Ï session¼³Á¤ÇØµÎ´Â °Í)
-			return "redirect:/loginForm.me";									//3. ·Î±×ÀÎÇÑ ÀûÀÌ ¾ø´Ù¸é ·Î±×ÀÎÇÏ·¯ °¡¶ó
+		if(session.getAttribute("loginInfo") == null) {							//2. nullï¿½Ì¶ï¿½ ï¿½ï¿½ï¿½ï¿½ loginInfoï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ç¼ï¿½ï¿½ï¿½ï¿½Ñ°ï¿½ ï¿½ï¿½ï¿½Ù´ï¿½ ï¿½ï¿½
+			session.setAttribute("destination", "redirect:/insert.prd");		//4. ï¿½Î±ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ñ¾î°¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ sessionï¿½ï¿½ï¿½ï¿½ï¿½Ï°ï¿½ ï¿½ï¿½ï¿½Ú´ï¿½(ï¿½ï¿½ï¿½ï¿½ï¿½Ï·ï¿½ï¿½Â°ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ loginï¿½Ï°ï¿½Íµï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Êµï¿½ï¿½ï¿½ sessionï¿½ï¿½ï¿½ï¿½ï¿½ØµÎ´ï¿½ ï¿½ï¿½)
+			return "redirect:/loginForm.me";									//3. ï¿½Î±ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ù¸ï¿½ ï¿½Î±ï¿½ï¿½ï¿½ï¿½Ï·ï¿½ ï¿½ï¿½ï¿½ï¿½
 		}
-		else {																	//5. ·Î±×ÀÎÀÌ µÇ¾îÀÖ´Ù¸é
-			return getPage;														//6. ¿ø·¡ °¡·Á°í Çß´ø formÀ¸·Î °¡¶ó
+		else {																	//5. ï¿½Î±ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ç¾ï¿½ï¿½Ö´Ù¸ï¿½
+			return getPage;														//6. ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ß´ï¿½ formï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 		}
+	}
+	
+	@RequestMapping(value = command, method = RequestMethod.POST)
+	public String doAction(@Valid Product product,BindingResult result) {
+		
+		if(result.hasErrors()) {
+			System.out.println("Product ìœ íš¨ì„± ê²€ì‚¬ ì˜¤ë¥˜");
+			return getPage;
+		}
+		
+		MultipartFile multi = product.getUpload();// MultipartFile ê°ì²´ë¥¼ í•˜ë‚˜ ë¦¬í„´
+		//MultipartFile ì•ˆì— transferTo ë§¤ì„œë“œê°€ ìˆë‹¤.
+		System.out.println("servletContext.getRealPath('/') " + servletContext.getRealPath("/"));
+		//C:\Spring_kmk\.metadata\.plugins\org.eclipse.wst.server.core\tmp1\wtpwebapps\15_MyBatis_Products\
+		//ìµœìƒìœ„ í´ë”ì˜ ìœ„ì¹˜ë¥¼ ê°€ì ¸ì™€ë¼
+		String uploadPath = servletContext.getRealPath("/resources");
+		System.out.println("uploadPath" + uploadPath);
+		//C:\Spring_kmk\.metadata\.plugins\org.eclipse.wst.server.core\tmp1\wtpwebapps\15_MyBatis_Products\resources
+		System.out.println("ìƒˆë¡œ ì„ íƒí•œ í™”ì¼ëª… : " + product.getImage());
+		
+		File file = new File(uploadPath + File.separator + product.getImage());
+		
+		try {
+			multi.transferTo(file); //ìœ„ì¹˜ì— jpgê°€ ì§„ì§œë¡œ ì§œë¼ì§œë¼ì§œì§œ ì˜¬ë¼ê°„ë‹¤
+		} catch (IllegalStateException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+		int cnt = productDao.insertData(product);
+		if(cnt < 0) {
+			System.out.println("insert ì‹¤íŒ¨");
+			return getPage;
+		}
+		return gotoPage;
 	}
 
 }

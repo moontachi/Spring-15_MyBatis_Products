@@ -1,6 +1,6 @@
 
 -------------------------------------------------------------------------------------
--- È¸¿ø Å×ÀÌºí
+-- íšŒì› í…Œì´ë¸”
 -------------------------------------------------------------------------------------
  DROP TABLE members CASCADE CONSTRAINTS;
 
@@ -24,17 +24,17 @@ create table members(
 ) ;
 
 -------------------------------------------------------------------------------------
--- DML(µ¥ÀÌÅÍ Á¶ÀÛ¾î) : insert, update, delete¸¦ ¸»ÇÑ´Ù.
+-- DML(ë°ì´í„° ì¡°ì‘ì–´) : insert, update, deleteë¥¼ ë§í•œë‹¤.
 -------------------------------------------------------------------------------------
 
 insert into members(id,name,password,salary,hiredate,gender,hobby,job,zipcode)
-values('kim','±èÃ¶¼ö','1234',100,sysdate,'³²ÀÚ','´ç±¸','ÇĞ»ı','123-456');
+values('kim','ê¹€ì² ìˆ˜','1234',100,sysdate,'ë‚¨ì','ë‹¹êµ¬','í•™ìƒ','123-456');
 
 insert into members(id,name,password,salary,hiredate,gender,hobby,job,zipcode)
-values('hong','È«±æµ¿','1234',100,sysdate,'³²ÀÚ','´ç±¸','ÇĞ»ı','123-456');
+values('hong','í™ê¸¸ë™','1234',100,sysdate,'ë‚¨ì','ë‹¹êµ¬','í•™ìƒ','123-456');
 
 insert into members(id,name,password,salary,hiredate,gender,hobby,job,zipcode)
-values('park','¹Ú¿µÈñ','1234',100,sysdate,'¿©ÀÚ','´ç±¸','ÇĞ»ı','123-456');
+values('park','ë°•ì˜í¬','1234',100,sysdate,'ì—¬ì','ë‹¹êµ¬','í•™ìƒ','123-456');
 
 commit ;
 
@@ -49,7 +49,7 @@ col job for a6
 select * from members;
 
 -------------------------------------------------------------------------------------
--- °Ô½Ã¹° Å×ÀÌºí
+-- ê²Œì‹œë¬¼ í…Œì´ë¸”
 -------------------------------------------------------------------------------------
 drop sequence myboard ;
 create sequence myboard start with 1 increment by 1 nocache ;
@@ -71,15 +71,15 @@ create table boards(
 
   
 -------------------------------------------------------------------------------------
--- »óÇ° Å×ÀÌºí
+-- ìƒí’ˆ í…Œì´ë¸”
 -------------------------------------------------------------------------------------
 drop sequence seqprod ;
 create sequence seqprod start with 1 increment by 1 nocache ;
 
 DROP TABLE products CASCADE CONSTRAINTS;
 
--- name : »óÇ°¸í, company : Á¦Á¶ È¸»ç, image : »óÇ° ÀÌ¹ÌÁö 
--- stock : Àç°í ¼ö·®, point : Àû¸³ Æ÷ÀÎÆ®, inputdate : ÀÔ°í ÀÏÀÚ, category : Ä«Å×°í¸®
+-- name : ìƒí’ˆëª…, company : ì œì¡° íšŒì‚¬, image : ìƒí’ˆ ì´ë¯¸ì§€ 
+-- stock : ì¬ê³  ìˆ˜ëŸ‰, point : ì ë¦½ í¬ì¸íŠ¸, inputdate : ì…ê³  ì¼ì, category : ì¹´í…Œê³ ë¦¬
 create table products(
 	num 		int primary key,
 	name 		varchar2(50) not null,	
@@ -95,36 +95,36 @@ create table products(
 
 -------------------------------------------------------------------------------------
 insert into products(num, name, company, image, stock, price, category, contents, point, inputdate)
-values(seqprod.nextval, '¼Òº¸·ç', '»ş´Ï', 'smile.jpg', 100, 1000, 'bread', '¸ÀÀÖ¾î¿ä', 10, sysdate );		
+values(seqprod.nextval, 'ì†Œë³´ë£¨', 'ìƒ¤ë‹ˆ', 'smile.jpg', 100, 1000, 'bread', 'ë§›ìˆì–´ìš”', 10, sysdate );		
 
 insert into products(num, name, company, image, stock, price, category, contents, point, inputdate)
-values(seqprod.nextval, 'Å©¸²»§', '»ş³Ú', 'smile.jpg', 50, 2000, 'bread', '¸ÀÀÖ¾î¿ä', 20, sysdate );		
+values(seqprod.nextval, 'í¬ë¦¼ë¹µ', 'ìƒ¤ë„¬', 'smile.jpg', 50, 2000, 'bread', 'ë§›ìˆì–´ìš”', 20, sysdate );		
 
 insert into products(num, name, company, image, stock, price, category, contents, point, inputdate)
-values(seqprod.nextval, 'Äİ¶ó', 'ÄÚÄ«', 'smile.jpg', 30, 3000, 'beverage', 'Å¹½õ´Ï´Ù', 30, sysdate );
+values(seqprod.nextval, 'ì½œë¼', 'ì½”ì¹´', 'smile.jpg', 30, 3000, 'beverage', 'íƒì©ë‹ˆë‹¤', 30, sysdate );
 
 insert into products(num, name, company, image, stock, price, category, contents, point, inputdate)
-values(seqprod.nextval, '»çÀÌ´Ù', 'Ä¥¼º', 'smile.jpg', 40, 4000, 'beverage', 'Å¹½õ´Ï´Ù', 40, sysdate );
+values(seqprod.nextval, 'ì‚¬ì´ë‹¤', 'ì¹ ì„±', 'smile.jpg', 40, 4000, 'beverage', 'íƒì©ë‹ˆë‹¤', 40, sysdate );
 
 insert into products(num, name, company, image, stock, price, category, contents, point, inputdate)
-values(seqprod.nextval, 'È¯Å¸', 'ÄÚÄ«', 'smile.jpg', 50, 5000, 'beverage', 'Å¹½õ´Ï´Ù', 50, sysdate );
+values(seqprod.nextval, 'í™˜íƒ€', 'ì½”ì¹´', 'smile.jpg', 50, 5000, 'beverage', 'íƒì©ë‹ˆë‹¤', 50, sysdate );
 
 insert into products(num, name, company, image, stock, price, category, contents, point, inputdate)
-values(seqprod.nextval, 'Ä¡Å²', '³×³×', 'smile.jpg', 50, 5000, 'chicken', '¸À¾ø¾î¿ä', 60, sysdate);	
+values(seqprod.nextval, 'ì¹˜í‚¨', 'ë„¤ë„¤', 'smile.jpg', 50, 5000, 'chicken', 'ë§›ì—†ì–´ìš”', 60, sysdate);	
 
 commit ;
   
 -------------------------------------------------------------------------------------
--- ÁÖ¹® (¸ÅÃâ) Å×ÀÌºí
+-- ì£¼ë¬¸ (ë§¤ì¶œ) í…Œì´ë¸”
 -------------------------------------------------------------------------------------
 drop sequence seqoid ;
 create sequence seqoid start with 1 increment by 1 nocache ;
 DROP TABLE orders CASCADE CONSTRAINTS;
 
--- orders : ÁÖ¹® Å×ÀÌºí
--- orderdate : ÁÖ¹® ÀÏÀÚ
--- on delete set null : È¸¿øÀÌ Å»ÅğÇÏ´õ¶óµµ ¸ÅÃâ µ¥ÀÌÅÍ´Â ³²°Ü µÖ¾ß ÇÑ´Ù.
--- oid : ÁÖ¹®(¼ÛÀå) ¹øÈ£, mid : È¸¿ø ¹øÈ£, orderdate : ÁÖ¹® ÀÏÀÚ
+-- orders : ì£¼ë¬¸ í…Œì´ë¸”
+-- orderdate : ì£¼ë¬¸ ì¼ì
+-- on delete set null : íšŒì›ì´ íƒˆí‡´í•˜ë”ë¼ë„ ë§¤ì¶œ ë°ì´í„°ëŠ” ë‚¨ê²¨ ë‘¬ì•¼ í•œë‹¤.
+-- oid : ì£¼ë¬¸(ì†¡ì¥) ë²ˆí˜¸, mid : íšŒì› ë²ˆí˜¸, orderdate : ì£¼ë¬¸ ì¼ì
 create table orders(
   oid number primary key,
   mid varchar2(10) references members(id) on delete set null,
@@ -134,15 +134,15 @@ create table orders(
   
   
 ------------------------------------------------------------------------------------------------------
--- orderdetails : ÁÖ¹® »ó¼¼ Å×ÀÌºí
+-- orderdetails : ì£¼ë¬¸ ìƒì„¸ í…Œì´ë¸”
 -------------------------------------------------------------------------------------
--- on delete cascade : »èÁ¦½Ã ¿¬¼âÀûÀ¸·Î ¸ğµç µ¥ÀÌÅÍ°¡ »èÁ¦
--- ÁÖ¹® Ãë¼Ò°¡ ¹ß»ıÇÏ¸é ÁÖ¹® »ó¼¼ Å×ÀÌºíµµ ¿¬¼âÀûÀ¸·Î »èÁ¦°¡ µÇ¾î¾ß ÇÏ¹Ç·Î on delete cascade ¿É¼Ç »ç¿ë
--- »óÇ°ÀÌ »èÁ¦µÇµµ ÁÖ¹® »ó¼¼ Å×ÀÌºí¿¡´Â ³²°Ü µÖ¾ß ÇÑ´Ù. on delete set null
+-- on delete cascade : ì‚­ì œì‹œ ì—°ì‡„ì ìœ¼ë¡œ ëª¨ë“  ë°ì´í„°ê°€ ì‚­ì œ
+-- ì£¼ë¬¸ ì·¨ì†Œê°€ ë°œìƒí•˜ë©´ ì£¼ë¬¸ ìƒì„¸ í…Œì´ë¸”ë„ ì—°ì‡„ì ìœ¼ë¡œ ì‚­ì œê°€ ë˜ì–´ì•¼ í•˜ë¯€ë¡œ on delete cascade ì˜µì…˜ ì‚¬ìš©
+-- ìƒí’ˆì´ ì‚­ì œë˜ë„ ì£¼ë¬¸ ìƒì„¸ í…Œì´ë¸”ì—ëŠ” ë‚¨ê²¨ ë‘¬ì•¼ í•œë‹¤. on delete set null
 drop sequence seqodid;
 create sequence seqodid start with 1 increment by 1 nocache ;
 
--- oid : ÁÖ¹®¹øÈ£,  pnum : »óÇ° ¹øÈ£,  qty : ÁÖ¹® ¼ö·®
+-- oid : ì£¼ë¬¸ë²ˆí˜¸,  pnum : ìƒí’ˆ ë²ˆí˜¸,  qty : ì£¼ë¬¸ ìˆ˜ëŸ‰
 drop table orderdetails purge ;
 
 create table orderdetails(

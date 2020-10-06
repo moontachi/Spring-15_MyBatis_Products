@@ -13,41 +13,42 @@ import utility.Paging;
 
 @Component("myMemberDao")
 public class MemberDao {
+	private final String namespace="member.model.Member";
 	
-	private String namespace = "member.model.Member";
-	
-	@Autowired 
+	@Autowired
 	SqlSessionTemplate sqlSessionTemplate;
 	
-	public void insertData(Member member) {
-		int cnt = sqlSessionTemplate.insert(namespace + ".InsertData", member);
-		System.out.println("cnt: "+cnt);
+	public void insertData(Member member){
+		sqlSessionTemplate.insert(namespace+".InsertData",member);
 	}
 	
-	public int getTotalCount(Map<String, String> map) {
-		
-		int cnt = sqlSessionTemplate.selectOne(namespace+ ".GetTotalCount",map);
+	public int getTotalCount(Map<String,String> map){
+		int cnt = sqlSessionTemplate.selectOne(namespace+".GetTotalCount",map);
 		return cnt;
 	}
 	
-	public List<Member> getDataList(Paging pageInfo,Map<String, String> map) {
+	public List<Member> getDataList(Paging paging,Map<String,String> map){
 		
 		List<Member> lists = new ArrayList<Member>();
-		
-		RowBounds rowBounds = new RowBounds(pageInfo.getOffset(), pageInfo.getLimit());	
-		lists = sqlSessionTemplate.selectList(namespace+ ".GetDataList",map,rowBounds);
-		System.out.println("lists.size(): "+lists.size());
-		
+		RowBounds rowBounds = new RowBounds(paging.getOffset(),paging.getLimit()); // 10,5
+		lists = sqlSessionTemplate.selectList(namespace+".GetDataList",map,rowBounds);
 		return lists;
-		
 	}
 	
-	public int deleteData(String id) {
-		
-		int cnt = sqlSessionTemplate.delete(namespace+ ".DeleteData",id);
-		System.out.println("delete_cnt: " +cnt);
-		return cnt;
-		
+	public void deleteData(String id){
+		sqlSessionTemplate.delete(namespace+".DeleteData",id);
 	}
-
+	
+	public Member getData(String id){
+		Member member = null;
+		member = sqlSessionTemplate.selectOne(namespace+".GetData",id);
+		return member;
+	}
 }
+
+
+
+
+
+
+

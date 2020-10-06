@@ -35,6 +35,9 @@
 		delete from members
 		where id = #{id}
 	</delete>
+	<select id="GetData" resultType="MyMember">
+		select * from members where id=#{id} 
+	</select>
  
 </mapper>
 

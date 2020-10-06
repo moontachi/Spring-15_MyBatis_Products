@@ -6,32 +6,32 @@ import org.hibernate.validator.constraints.NotEmpty;
 
 public class Member {
 	
-	@NotEmpty(message="¾ÆÀÌµğ´Â ÇÊ¼öÀÔ´Ï´Ù.")
+	@NotEmpty(message="ì•„ì´ë””ëŠ” í•„ìˆ˜ì…ë‹ˆë‹¤.")
 	private String id;
 	
-	@NotEmpty(message="ÀÌ¸§Àº ÇÊ¼öÀÔ´Ï´Ù.")
+	@NotEmpty(message="ì´ë¦„ì€ í•„ìˆ˜ì…ë‹ˆë‹¤.")
 	private String name;
 	
-	@NotEmpty(message = "ºñ¹Ğ¹øÈ£´Â ÇÊ¼öÀÔ´Ï´Ù.")
+	@NotEmpty(message = "ë¹„ë°€ë²ˆí˜¸ëŠ” í•„ìˆ˜ì…ë‹ˆë‹¤.")
 	private String password;
 	
 	private int salary;
 	private String hiredate;
 	
-	@NotNull(message="¼ºº°À» ¼±ÅÃÇÏ¼¼¿ä")
+	@NotNull(message="ì„±ë³„ì„ ì„ íƒí•˜ì„¸ìš”")
 	private String gender;
 	
-	@NotNull(message="Ãë¹Ì´Â 1°³ ÀÌ»ó ¼±ÅÃÇØ¾ß ÇÕ´Ï´Ù.")
+	@NotNull(message="ì·¨ë¯¸ëŠ” 1ê°œ ì´ìƒ ì„ íƒí•´ì•¼ í•©ë‹ˆë‹¤.")
 	private String hobby;
 	
 	private String job;
 	private String zipcode;
 	
-	@NotEmpty(message="ÁÖ¼Ò1Àº ÇÊ¼öÀÔ´Ï´Ù/")
+	@NotEmpty(message="ì£¼ì†Œ1ì€ í•„ìˆ˜ì…ë‹ˆë‹¤/")
 	private String address1;
 	
 	private String address2;
-	private int mpoint;			//Àû¸³Æ÷ÀÎÆ® ¸¦ À§ÇÑ º¯¼ö
+	private int mpoint;			//ì ë¦½í¬ì¸íŠ¸ ë¥¼ ìœ„í•œ ë³€ìˆ˜
 	
 	public Member() {
 		

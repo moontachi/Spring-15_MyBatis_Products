@@ -24,6 +24,23 @@
 			</if>
 		order by num desc
 	</select>
+	
+	<insert id="InsertData">
+		insert into products(num, name, company, image, stock, price,contents,point,inputdate)
+		values(seqprod.nextval, #{name}, #{company}, #{image},#{stock}, #{price}, #{contents}, #{point}, sysdate)
+	</insert>
+	
+	<select id="GetDetailView" resultType="MyProduct">
+		select * from products
+		where num = #{num}
+	</select>
+	
+	<update id="UpdateData">
+		update products set name = #{name},company = #{company},price = #{price},
+		stock = #{stock}, point = #{point}, contents= #{contents}, 
+		image = #{image},inputdate = #{inputdate}
+		where num = #{num}
+	</update>
 
 </mapper>
 

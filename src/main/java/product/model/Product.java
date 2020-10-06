@@ -1,23 +1,55 @@
 package product.model;
 
+import javax.validation.constraints.Min;
+
+import org.hibernate.validator.constraints.Length;
+import org.hibernate.validator.constraints.NotEmpty;
+import org.springframework.web.multipart.MultipartFile;
+
 public class Product {
 	
 	private int num;
-	private String name; 
+	@Length(min=3, max=10,message = "상품 이름은 최소 3자리 최대 10자리 입니다.")
+	private String name;
 	private String company; 
+	@NotEmpty(message = "파일 선택 안함")
 	private String image; 
-	private int stock; 
+	private int stock;
+	@Min(value = 3000,message = "가격은 최소 3000원 이상 이여야 합니다.")
 	private int price; 
 	private String category; 
+	@Length(min=10, max=15,message = "상품에 대한 설명은 최소 10자리 최대 15자리 입니다.")
 	private String contents; 
 	private int point; 
 	private String inputdate;
 	
-	private int orderqty;	//�ֹ����� ���� �����ϳ� �߰��ϱ�
+	private int orderqty;	//주문 수량
+	
+	private String uploadOld; // 수정 이전
+	
+	private MultipartFile upload;
 	
 	
 	
 	
+	public String getUploadOld() {
+		return uploadOld;
+	}
+	public void setUploadOld(String uploadOld) {
+		this.uploadOld = uploadOld;
+	}
+	public MultipartFile getUpload() {
+		return upload;
+	}
+	public void setUpload(MultipartFile upload) {
+		this.upload = upload;
+		System.out.println("upload :" + upload);
+		if(upload != null) {
+			System.out.println(upload.getName());
+			System.out.println(upload.getOriginalFilename());
+			this.image = upload.getOriginalFilename();
+		}
+	}
 	public Product() {
 		
 	}
