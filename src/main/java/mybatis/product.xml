@@ -41,6 +41,18 @@
 		image = #{image},inputdate = #{inputdate}
 		where num = #{num}
 	</update>
+	
+	
+	<delete id="DeleteData">
+		delete from products 
+		where num= #{num}
+	</delete>
+	
+	<update id="UpdateStock">
+		update products set
+		stock = stock - #{stock}
+		where num = #{num}
+	</update>
 
 </mapper>
 

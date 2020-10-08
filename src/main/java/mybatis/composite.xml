@@ -2,7 +2,23 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="product.model.Composite">	  
+<mapper namespace="product.model.Composite">	
+	<select id="OrderMall" resultType="MyOrder">
+		select * from orders
+		where mid = #{id}
+		order by oid desc
+	</select>
+	
+	
+	<select id="ShowDetail" resultType="mall.cart.ShoppingInfo">
+		select p.num pnum, p.name pname,od.qty,p.price,od.qty * p.price amount
+		from orderdetails od inner join products p
+		on od.pnum = p.num and od.oid=#{oid}
+		order by od.odid desc
+	</select>
+
+
+  
 </mapper>
 
 

@@ -57,6 +57,25 @@ public class ProductDao {
 		int cnt = sqlSessionTemplate.update(namespace + ".UpdateData",bean);
 		return cnt;
 	}
+	
+	
+	
+	public int deleteData(int num) {
+		
+		int cnt = sqlSessionTemplate.delete(namespace + ".DeleteData",num);
+		
+		return cnt;
+	}
+	
+	
+	
+	public void updateStock(Integer pnum,Integer qty) {
+		Product bean = new Product();
+		bean.setNum(pnum);
+		bean.setStock(qty);
+		sqlSessionTemplate.update(namespace + ".UpdateStock",bean);
+		//업데이트는 뒤에 하나 밖에 넣을 수 없어서, 넘겨줘야 한다면 하나의 묶음으로 보내야 한다.
+	}
 
 	
 	

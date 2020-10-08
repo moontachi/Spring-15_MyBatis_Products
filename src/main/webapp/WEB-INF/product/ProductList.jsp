@@ -49,7 +49,7 @@ ProductList.jsp <br>
 			</td>
 			<td>${bean.contents }</td>
 			<td>${bean.price }</td>
-			<td><a href="delete.prd?num=${bean.num }&pageNumber=${pageInfo.pageNumber}">삭제</a></td>
+			<td><a href="delete.prd?num=${bean.num }">삭제</a></td>
 			<td><input type="button" value="수정" onclick="goUpdate('${bean.num }')"></td>																		
 		</tr>
 	</c:forEach>

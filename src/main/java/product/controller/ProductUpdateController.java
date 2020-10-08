@@ -34,7 +34,7 @@ public class ProductUpdateController {
 		ModelAndView mav = new ModelAndView();
 		
 		if(session.getAttribute("loginInfo") == null) {
-			session.setAttribute("destination", "redirect:/update.prd?num=");
+			session.setAttribute("destination", "redirect:/update.prd?num="+num);
 			mav.setViewName("redirect:/loginForm.me");
 			return mav;
 		}else {

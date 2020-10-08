@@ -34,9 +34,11 @@
 		<tr>
 			<td>주문수량</td>
 			<td>
-				<form action="" method="post">
+				<!-- add.mall -> CartAddController  -->
+				<form action="add.mall" method="post">
+					<input type="hidden" name="num" value="${product.num }">
 					<input type="text" name="orderqty" value="1"/>
-					<input type="button" value="주문"/>
+					<input type="submit" value="주문"/>
 				</form>
 			</td>
 		</tr>
